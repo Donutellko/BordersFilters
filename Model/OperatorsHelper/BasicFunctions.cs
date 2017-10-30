@@ -68,16 +68,16 @@ namespace Model.OperatorsHelper
             }
             return max;
         }
-        /// <summary>
-        /// Составляет двумерный массив Color из массивов цветов.
-        /// </summary>
-        /// <param name="dst">Изменяемый массив.</param>
-        /// <param name="srcR">Массив яркости красных цветов.</param>
-        /// <param name="srcG">Массив яркости зелёных цветов.</param>
-        /// <param name="srcB">Массив яркости синих цветов.</param>
-        /// <returns></returns>
-        public static Color[,] GetColorArray(this Color[,] dst, byte[,] srcR, byte[,] srcG, byte[,] srcB)
-        {
+		/// <summary>
+		/// Составляет двумерный массив Color из массивов цветов.
+		/// </summary>
+		/// <param name="dst">Изменяемый массив.</param>
+		/// <param name="srcR">Массив яркости красных цветов.</param>
+		/// <param name="srcG">Массив яркости зелёных цветов.</param>
+		/// <param name="srcB">Массив яркости синих цветов.</param>
+		/// <returns></returns>
+		public static Color[,] GetColorArray(this Color[,] dst, byte[,] srcR, byte[,] srcG, byte[,] srcB) {
+			if (srcB == null || srcG == null || srcR == null) return null;
             dst.ForEach((i, j) => dst[i, j] = Color.FromArgb(srcR[i, j], srcG[i, j], srcB[i, j]));
             return dst;
         }
@@ -133,5 +133,29 @@ namespace Model.OperatorsHelper
         /// Конвернирует double в byte, сохраняя максимальность или минимальность значения при отбрасывании битов.
         /// </summary>
         public static byte ToByte(this double value) => (byte)(value > 255 ? 255 : (value < 0 ? 0 : value));
-    }
+
+		/// <summary>
+		/// Задаёт в матрице симметрично с четырёх сторон переданное значение 
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="dst"></param>
+		/// <param name="i"></param>
+		/// <param name="j"></param>
+		/// <param name="value">значение</param>
+		/// <returns></returns>
+		public static T[,] SymmetricalSetter<T>(this T[,] dst, int i, int j, T value) {
+			int size = dst.GetUpperBound(0);
+			dst[i, j] = dst[size - j, i] = dst[j, size - i] = dst[size - i, size - j] = value;
+			return dst;
+		}
+
+		public static int[,] Invert(this int[,] dst) {
+			int size = dst.GetUpperBound(0);
+			int[,] result = new int[size, size];
+			for (int i = 0; i < size; i++)
+				for (int j = 0; j < size; j++)
+					result[i, j] = -dst[i, j];
+			return result;
+		}
+	}
 }

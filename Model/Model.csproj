@@ -55,6 +55,7 @@
     <Compile Include="Operators\IdentityOperator.cs" />
     <Compile Include="Operators\BrightnessOperator.cs" />
     <Compile Include="Operators\KannyOperator.cs" />
+    <Compile Include="Operators\LaplasOperator.cs" />
     <Compile Include="Operators\PrevittOperator.cs" />
     <Compile Include="Operators\RobertsOperator.cs" />
     <Compile Include="Operators\SobelOperator.cs" />

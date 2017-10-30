@@ -23,7 +23,6 @@ namespace Model
 	public enum OperatorsEnum {
 		BrightnessOperator = 0, InvertionOperator, IdentityOperator,
 		GaussOperator, KannyOperator, SobelOperator, LaplasOperator, PruittOperator, RobertsOperator
-		// Operator0 = 0, Operator1, Operator2, Operator3, Operator4
 	}
 
 	public class Initialization
@@ -90,6 +89,7 @@ namespace Model
 				    oper = new SobelOperator();
                     break;
 				case OperatorsEnum.LaplasOperator:
+					oper = new LaplasOperator();
 					break;
 				case OperatorsEnum.PruittOperator:
 					oper = new PrevittOperator();
@@ -106,7 +106,7 @@ namespace Model
 		    if (oper != null)
 		    {
 		        var result = !RGBOperator? 
-		            oper.Transform(srcMatrix.GetGrayArray(), ReapplyCount).GetColorArray() :
+		            oper.Transform(srcMatrix.GetGrayArray(), ReapplyCount)?.GetColorArray() :
 		            srcMatrix.GetColorArray(oper.Transform(srcMatrix.GetRedArray(), ReapplyCount),
                                             oper.Transform(srcMatrix.GetGreenArray(), ReapplyCount),
                                             oper.Transform(srcMatrix.GetBlueArray(), ReapplyCount));

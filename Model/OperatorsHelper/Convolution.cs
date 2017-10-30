@@ -58,7 +58,7 @@ namespace Model.OperatorsHelper
             double gx = pix.Process(i, j, operX);
             double gy = pix.Process(i, j, operY);
 
-            return Math.Sqrt(gx * gx + gy * gy).ToByte(); //(Math.Abs(gx) + Math.Abs(gy)).ToByte();
+            return Math.Sqrt(gx * gx + gy * gy).ToByte();
         }
         /// <summary>
         /// Применяет формулу свёртки для двух операторов, вычисляя приближённое значение производной и возвращая угол градиента.
